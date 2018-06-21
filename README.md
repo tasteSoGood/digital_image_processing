@@ -41,3 +41,19 @@
     $ git commit -m 'name'
     $ git push origin master
 ```
+
+## 异地更改+同步
+
+当需要在异地（在机器B上）开发该项目的时候，可以使用
+
+```git
+    $ git clone https://github.com/you/example.git
+```
+
+用来将github上面的项目克隆到机器B
+
+当在机器B上做了一些更改之后，又想回到机器A开发，可以在机器A上对该项目做出的更改进行同步
+
+```git
+    $ git pull origin master
+```
