@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2 as cv
 
-def imfilter(f, w, mode = 'conv', expand = 'zero', size = 'full'):
+def imfilter(f, w, mode = 'conv', expand = 'replicate', size = 'same'):
     temp = f.copy()
     temp = temp / 255 # 减小整数的舍入误差
     # 加边距
