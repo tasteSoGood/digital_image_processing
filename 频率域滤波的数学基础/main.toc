@@ -1,0 +1,5 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}傅里叶变换的理论部分}{5}
+\contentsline {section}{\numberline {1.1}傅里叶级数的复数形式}{5}
+\contentsline {section}{\numberline {1.2}傅里叶积分公式}{6}
+\contentsline {section}{\numberline {1.3}傅里叶变换}{7}
+\contentsline {section}{\numberline {1.4}傅里叶变换的性质}{7}
