@@ -4,6 +4,7 @@
 \usepackage{amssymb}             %数学公式
 \usepackage{amsfonts}            %数学字体
 \usepackage{mathrsfs}            %数学花体
+\usepackage{graphicx}
 
 \title{频率域滤波的数学基础}
 \author{玩味者}
@@ -185,197 +186,195 @@
 						\end{split}
 					\end{equation}
 		
-				% 	用类似的方法（限制条件），可以得到
-				% 	\begin{equation}
-				% 	\mathscr{F}^{-1}[F'(\omega)]=-it\mathscr{F}^{-1}[F(\omega)]
-				% 	\end{equation}
-				% 	这个性质是很有用的，它把一个函数的求导变成了对应域中的乘因子
+					用类似的方法（限制条件），可以得到
+					\begin{equation}
+						\mathscr{F}^{-1}[F'(\omega)]=-it\mathscr{F}^{-1}[F(\omega)]
+					\end{equation}
+					这个性质是很有用的，它把一个函数的求导变成了对应域中的乘因子
 		
-				% 	使用数学归纳法可以很容易证明，对于$n$阶微分也有该性质，区别在于对因子求$n$次幂
+					使用数学归纳法可以很容易证明，对于$n$阶微分也有该性质，区别在于对因子求$n$次幂
 		
-				% 	在求导方便的时候，可以用这种方法来求$t^nf(t)$形式函数的傅里叶变换结果；反之，则可以用傅里叶变换求出导数
+					在求导方便的时候，可以用这种方法来求$t^nf(t)$形式函数的傅里叶变换结果；反之，则可以用傅里叶变换求出导数
 
-				% \item{积分性质}
-				% 	\begin{equation}
-				% 	\begin{split}\\
-				% 	\begin{split}\\
-				% 	\mathscr{F}[f(t)]&=\mathscr{F}[\dfrac{d}{dt}\int_{-\infty}^tf(t)\ dt]\\
-				% 	&= i\omega\mathscr{F}[\int_{-\infty}^tf(t)\ dt]
-				% 	\end{split}\\
-				% 	\Rightarrow\mathscr{F}[\int_{-\infty}^tf(t)\ dt]=\dfrac{1}{i\omega}\mathscr{F}[f(t)]
-				% 	\end{split}
-				% \end{equation}
-				% 	同理
-				% 	\begin{equation}
-				% 	\mathscr{F}^{-1}[\int_{-\infty}^\omega F(\omega)\ d\omega]=-\dfrac{1}{it}\mathscr{F}^{-1}[F(\omega)]
-				% 	\end{equation}
-				% 	和微分性质类似，这里不再赘述
+				\item{积分性质}
+					\begin{equation}
+						\begin{split}
+							\begin{split}
+							\mathscr{F}[f(t)]&=\mathscr{F}[\dfrac{d}{dt}\int_{-\infty}^tf(t)\ dt]\\
+							&= i\omega\mathscr{F}[\int_{-\infty}^tf(t)\ dt]
+							\end{split}\\
+							\Rightarrow\mathscr{F}[\int_{-\infty}^tf(t)\ dt]=\dfrac{1}{i\omega}\mathscr{F}[f(t)]
+						\end{split}
+					\end{equation}
+					同理
+					\begin{equation}
+						\mathscr{F}^{-1}[\int_{-\infty}^\omega F(\omega)\ d\omega]=-\dfrac{1}{it}\mathscr{F}^{-1}[F(\omega)]
+					\end{equation}
+					和微分性质类似，这里不再赘述
 
-				% \item{乘积定理}
-				% 	设$F_1(\omega) = \mathscr{F}[f_1(t)]$，$F_2(\omega) = \mathscr{F}[f_2(t)]$，则
-				% 	\begin{equation}
-				% 	\int_{-\infty}^{\infty}\overline{f_1(t)}f_2(t)dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}\overline{F_1(\omega)}F_2(\omega)d\omega\\
-				% 	\int_{-\infty}^{\infty}f_1(t)\overline{f_2(t)}dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_1(\omega)\overline{F_2(\omega)}d\omega
-				% 	\end{equation}
-				% 	这个结论很有意思，这说明原函数的乘积之积分和变换之后的乘积之积分仅有一个系数的差异（如果按照另外一种傅里叶变换的定义，则这个系数差异也没有）
+				\item{乘积定理}
+					设$F_1(\omega) = \mathscr{F}[f_1(t)]$，$F_2(\omega) = \mathscr{F}[f_2(t)]$，则
+					\begin{equation}
+						\begin{split}
+							&\int_{-\infty}^{\infty}\overline{f_1(t)}f_2(t)dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}\overline{F_1(\omega)}F_2(\omega)d\omega\\
+							&\int_{-\infty}^{\infty}f_1(t)\overline{f_2(t)}dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_1(\omega)\overline{F_2(\omega)}d\omega
+						\end{split}
+					\end{equation}
+					这个结论很有意思，这说明原函数的乘积之积分和变换之后的乘积之积分仅有一个系数的差异（如果按照另外一种傅里叶变换的定义，则这个系数差异也没有）
 
-				% \item{能量积分}
-				% 	如果在上一个性质中，两个函数一样，那么可以得到
-				% 	\begin{equation}
-				% 	\int_{-\infty}^{\infty}[f(t)]^2\ dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}|F(\omega)|^2\ d\omega
-				% 	\end{equation}
-				% 	这个结论是非常重要的，称为Parseval等式，令
-				% 	\begin{equation}
-				% 	S(\omega)=|F(\omega)|^2
-				% 	\end{equation}
-				% 	称为**能量密度函数**或**能量谱密度**，由它可以决定函数$f(t)$的能量分布规律
+				\item{能量积分}
+					如果在上一个性质中，两个函数一样，那么可以得到
+					\begin{equation}
+						\int_{-\infty}^{\infty}[f(t)]^2\ dt=\dfrac{1}{2\pi}\int_{-\infty}^{\infty}|F(\omega)|^2\ d\omega
+					\end{equation}
+					这个结论是非常重要的，称为Parseval等式，令
+					\begin{equation}
+						S(\omega)=|F(\omega)|^2
+					\end{equation}
+					称为\textbf{能量密度函数}或\textbf{能量谱密度}，由它可以决定函数$f(t)$的能量分布规律
 		
-				% 	\fbox{这里说$[f(t)]^2$是能量密度，或者说信号的“功率”，这是需要解释的：
+					这里说$[f(t)]^2$是能量密度，或者说信号的“功率”，这是需要解释的：
 					
-				% 	所谓功率，在物理上的定义是单位时间内做功的多少，以如下式定义：
-					
-				% 	\begin{equation}
-				% 	P = \dfrac{W}{t}
-				% 	\end{equation}
-				% 	更进一步，我们假设这个函数是一个电信号的抽象。在电路中：
-					
-				% 	\begin{equation}
-				% 	P = UI = I^2R = \dfrac{U^2}{R}
-				% 	\end{equation}
-				% 	以上面的式子来看，信号幅值的度量是用电压的高低表示的，如果把电路中的电阻值视为单位1，那么输出信号的瞬时功率就是
-					
-				% 	\begin{equation}
-				% 	P = U^2
-				% 	\end{equation}
-				% 	一段时间内的功率就应该对其在时间上积分，所以，用信号的平方表示信号的功率是恰当的}
+					所谓功率，在物理上的定义是单位时间内做功的多少，以如下式定义：
+					\begin{equation}
+					P = \dfrac{W}{t}
+					\end{equation}
+					更进一步，我们假设这个函数是一个电信号的抽象。在电路中：
+					\begin{equation}
+					P = UI = I^2R = \dfrac{U^2}{R}
+					\end{equation}
+					以上面的式子来看，信号幅值的度量是用电压的高低表示的，如果把电路中的电阻值视为单位1，那么输出信号的瞬时功率就是
+					\begin{equation}
+					P = U^2
+					\end{equation}
+					一段时间内的功率就应该对其在时间上积分，所以，用信号的平方表示信号的功率是恰当的
 			\end{enumerate}
 
-	% ## 卷积定理
+		\section{卷积定理}
+			卷积的定义是：
+			\begin{equation}
+				f_1(t)*f_2(t) = \int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau
+			\end{equation}
+			下面结合(14)，我们对两个函数的卷积进行傅里叶变换：
+			\begin{equation}
+				\begin{split}
+				\mathscr{F}[f_1(t)*f_2(t)] &= \mathscr{F}[\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau]\\
+				&= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau\ e^{-i\omega t}\ dt\\
+				&= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)e^{-i\omega (\tau + t -\tau)}\ d\tau dt\\
+				&= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}f_2(t - \tau)e^{-i\omega (t - \tau)}\ d\tau dt\\
+				&= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}f_2(t - \tau)e^{-i\omega (t - \tau)}\ dt d\tau\\
+				&= \int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}d\tau\int_{-\infty}^{+\infty}f_2(t - \tau)e^{-i\omega (t - \tau)}\ dt\\
+				&= \mathscr{F}[f_1(t)]\cdot\mathscr{F}[f_2(t)]
+				\end{split}
+			\end{equation}
+			同理可得
+			\begin{equation}
+				\begin{split}
+					\mathscr{F}[f_1(t)\cdot f_2(t)] &= \dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_1(\omega) e^{i\omega t} d\omega\ \dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_2(\omega) e^{i\omega t} d\omega\\
+					&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}F_1(\tau) e^{i\tau t} d\tau\ \int_{-\infty}^{\infty}F_2(\omega - \tau) e^{i(\omega - \tau) t} d(\omega - \tau)\\
+					&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F_1(\tau) e^{i\tau t} F_2(\omega - \tau) e^{i(\omega - \tau) t}\ d\tau d\omega\\
+					&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\left[\int_{-\infty}^{\infty}F_1(\tau) F_2(\omega - \tau)\ d\tau\right]e^{i\omega t}d\omega\\
+					&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\left[F_1(\omega)*F_2(\omega)\right]e^{i\omega t}d\omega\\
+					&= \dfrac{1}{2\pi}\mathscr[F_1(\omega)*F_2(\omega)]
+				\end{split}
+			\end{equation}
+			我们称(33)式为\textbf{时域的卷积定理}，称(34)式为\textbf{频域的卷积定理}
 
-	% 卷积的定义是：
-	% $$
-	% f_1(t)*f_2(t) = \int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau
-	% $$
-	% 下面结合(14)，我们对两个函数的卷积进行傅里叶变换：
-	% $$
-	% \begin{array}\\
-	% \mathscr{F}[f_1(t)*f_2(t)] &= \mathscr{F}[\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau]\\
-	% &= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)\ d\tau\ e^{-i\omega t}\ dt\\
-	% &= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)f_2(t - \tau)e^{-i\omega (\tau + t -\tau)}\ d\tau dt\\
-	% &= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}f_2(t - \tau)e^{-i\omega (t - \tau)}\ d\tau dt\\
-	% &= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}f_2(t - \tau)e^{-i\omega (t - \tau)}\ dt d\tau\\
-	% &= \int_{-\infty}^{+\infty}f_1(\tau)e^{-i\omega \tau}d\tau\int_{-\infty}^{+\infty}f_2(t - \tau)e^{-i\omega (t - \tau)}\ dt\\
-	% &= \mathscr{F}[f_1(t)]\cdot\mathscr{F}[f_2(t)]
-	% \end{array}
-	% $$
-	% 同理可得
+	\chapter{一些特殊函数的傅里叶变换}
+		\section{方波}
+			\begin{equation}
+				f(t)=E, \quad t\in \left[-\frac{\tau}{2}, \frac{\tau}{2}\right]
+			\end{equation}
+			下面求$f(t)$的傅里叶变换结果
+			\begin{equation}
+				\begin{split}
+					\mathscr{F}[f(t)] &= \int_{-\infty}^{\infty}f(t)e^{-i\omega t}\ dt\\
+					&= \int_{-\infty}^{\infty}E\ e^{-i\omega t}\ dt\\
+					&= -\dfrac{E}{i\omega}e^{-i\omega t}|_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\\
+					&= \dfrac{E}{i\omega}(e^{i\omega \frac{\tau}{2}}-e^{-i\omega\frac{\tau}{2}})\\
+				\end{split}
+			\end{equation}
+			上式利用欧拉定理(2)，得到
+			\begin{equation}
+				\begin{split}
+					\mathscr{F}[f(t)] &= \dfrac{E}{i\omega}(e^{i\omega \frac{\tau}{2}}-e^{-i\omega\frac{\tau}{2}})\\
+					&= \dfrac{E}{i\omega}(\cos (\omega \dfrac{\tau}{2}) +i \sin(\omega \dfrac{\tau}{2})-\cos (-\omega \dfrac{\tau}{2}) -i \sin(-\omega \dfrac{\tau}{2}))\\
+					&= \dfrac{E}{i\omega}(i \sin(\omega \dfrac{\tau}{2}) +i \sin(\omega \dfrac{\tau}{2}))\\
+					&= \dfrac{2E}{\omega}\sin\dfrac{\omega\tau}{2}\\
+				\end{split}
+			\end{equation}
+			图\ref{fig1}是由Mathematica生成的图像，表示$E = 1, \tau = 1$时的图像
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[scale=0.3]{1.png}
+				\caption{方波的傅里叶变换}
+				\label{fig1}
+			\end{figure}
 
-	% $$
-	% \begin{array}\\
-	% 	\mathscr{F}[f_1(t)\cdot f_2(t)] &= \dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_1(\omega) e^{i\omega t} d\omega\ \dfrac{1}{2\pi}\int_{-\infty}^{\infty}F_2(\omega) e^{i\omega t} d\omega\\
-	% 	&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}F_1(\tau) e^{i\tau t} d\tau\ \int_{-\infty}^{\infty}F_2(\omega - \tau) e^{i(\omega - \tau) t} d(\omega - \tau)\\
-	% 	&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}F_1(\tau) e^{i\tau t} F_2(\omega - \tau) e^{i(\omega - \tau) t}\ d\tau d\omega\\
-	% 	&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\left[\int_{-\infty}^{\infty}F_1(\tau) F_2(\omega - \tau)\ d\tau\right]e^{i\omega t}d\omega\\
-	% 	&= \dfrac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\left[F_1(\omega)*F_2(\omega)\right]e^{i\omega t}d\omega\\
-	% 	&= \dfrac{1}{2\pi}\mathscr[F_1(\omega)*F_2(\omega)]
-	% \end{array}
-	% $$
-	% 我们称(33)式为**时域的卷积定理**，称(34)式为**频域的卷积定理**
+			应当注意到，这个函数是$\dfrac{\sin x}{x}$的变形，在$x=0$的时候是没有定义的
 
-	% # 一些特殊函数的傅里叶变换
+		\section{$\delta$-函数}
 
-	% ## 方波
+			这是一种广义的函数由一个描述和一个积分式共同定义
+			\begin{equation}
+				\delta(t) = \left\{
+				\begin{aligned}
+				\infty & \qquad t=0\\
+				0& \qquad else 
+				\end{aligned}
+				\right.
+			\end{equation}
+			并且
+			\begin{equation}
+				\int_{-\infty}^{\infty}\delta(t)\ dt=\int_{0}^{\epsilon}\dfrac{1}{\epsilon}\ dt=1
+			\end{equation}
 
-	% $$
-	% f(t)=E, \quad t\in \left[-\frac{\tau}{2}, \frac{\tau}{2}\right]
-	% $$
-	% 下面求$f(t)$的傅里叶变换结果
+			这个函数没办法用图像表示出来，因为它在$t = 0$的时候有一个无穷大的冲激，而在其他地方值为0，就好像用钉子钉墙，一个能量恒定的冲激作用在一个面积很小的点上，而其他的地方则没有能量作用。故这个函数又叫做冲激函数。
 
-	% $$
-	% \begin{array}\\
-	% \mathscr{F}[f(t)] &= \int_{-\infty}^{\infty}f(t)e^{-i\omega t}\ dt\\
-	% &= \int_{-\infty}^{\infty}E\ e^{-i\omega t}\ dt\\
-	% &= -\dfrac{E}{i\omega}e^{-i\omega t}|_{-\frac{\tau}{2}}^{\frac{\tau}{2}}\\
-	% &= \dfrac{E}{i\omega}(e^{i\omega \frac{\tau}{2}}-e^{-i\omega\frac{\tau}{2}})\\
-	% \end{array}
-	% $$
-	% 上式利用欧拉定理(2)，得到
-	% $$
-	% \begin{array}\\
-	% \mathscr{F}[f(t)] &= \dfrac{E}{i\omega}(e^{i\omega \frac{\tau}{2}}-e^{-i\omega\frac{\tau}{2}})\\
-	% &= \dfrac{E}{i\omega}(\cos (\omega \dfrac{\tau}{2}) +i \sin(\omega \dfrac{\tau}{2})-\cos (-\omega \dfrac{\tau}{2}) -i \sin(-\omega \dfrac{\tau}{2}))\\
-	% &= \dfrac{E}{i\omega}(i \sin(\omega \dfrac{\tau}{2}) +i \sin(\omega \dfrac{\tau}{2}))\\
-	% &= \dfrac{2E}{\omega}\sin\dfrac{\omega\tau}{2}\\
-	% \end{array}
-	% $$
-	% 下面是由Mathematica生成的图像，表示$E = 1, \tau = 1$时的图像
+			下面证明，$\delta$-函数具有采样性质：
+			\begin{equation}
+				\int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt=f(t_0)
+			\end{equation}
 
-	% ![](F:\MyCode\笔记\数字图像处理\方波的傅里叶变换.png)
+			设$f(t)$是一个在$t_0$处连续的函数
+			\begin{equation}
+				\int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = \lim_{\epsilon\to 0}\dfrac{1}{\epsilon}\int_{t_0}^{t_0+\epsilon}f(t)\ dt
+			\end{equation}
+			
+			利用积分中值定理
+			\begin{equation}
+				\int_{a}^{b}f(x)\ dx = f(\epsilon) (b - a)\qquad a\leq\epsilon\leq b
+			\end{equation}
+			可以得到
+			\begin{equation}
+				\int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = f(\tau)\qquad \tau\in\left[t_0, t_0 + \epsilon\right]
+			\end{equation}
+			由于$\epsilon\to 0$，所以
+			\begin{equation}
+				\int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = f(t_0)
+			\end{equation}
+			
+			命题得证
 
-	% 应当注意到，这个函数是$\dfrac{\sin x}{x}$的变形，在$x=0$的时候是没有定义的
-
-	% ## $\delta$-函数
-
-	% 这是一种广义的函数由一个描述和一个积分式共同定义
-	% $$
-	% \delta(t) = \left\{
-	% \begin{aligned}
-	% \infty & \qquad t=0\\
-	% 0& \qquad else 
-	% \end{aligned}
-	% \right.
-	% $$
-	% 并且
-	% $$
-	% \int_{-\infty}^{\infty}\delta(t)\ dt=\int_{0}^{\epsilon}\dfrac{1}{\epsilon}\ dt=1
-	% $$
-
-	% 这个函数没办法用图像表示出来，因为它在$t = 0$的时候有一个无穷大的冲激，而在其他地方值为0，就好像用钉子钉墙，一个能量恒定的冲激作用在一个面积很小的点上，而其他的地方则没有能量作用。故这个函数又叫做冲激函数。
-
-	% 下面证明，$\delta$-函数具有采样性质：
-	% $$
-	% \int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt=f(t_0)
-	% $$
-
-	% > 设$f(t)$是一个在$t_0$处连续的函数
-	% > $$
-	% > \int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = \lim_\limits{\epsilon\to0}\dfrac{1}{\epsilon}\int_{t_0}^{t_0+\epsilon}f(t)\ dt
-	% > $$
-	% >
-	% > 利用积分中值定理
-	% > $$
-	% > \int_{a}^{b}f(x)\ dx = f(\epsilon) (b - a)\qquad a\leq\epsilon\leq b
-	% > $$
-	% > 可以得到
-	% > $$
-	% > \int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = f(\tau)\qquad \tau\in\left[t_0, t_0 + \epsilon\right]
-	% > $$
-	% > 由于$\epsilon\to 0$，所以
-	% >
-	% > $$
-	% > \int_{-\infty}^{\infty}\delta(t-t_0)f(t)\ dt = f(t_0)
-	% > $$
-	% > 
-	% > 命题得证
-
-	% 证明了这个性质之后，它的傅里叶变换便可以直接得出来：
-	% $$
-	% \mathscr{F}[\delta(t)]=\int_{-\infty}^{\infty}\delta(t)e^{-i\omega t}\ dt=1
-	% $$
+			证明了这个性质之后，它的傅里叶变换便可以直接得出来：
+			\begin{equation}
+				\mathscr{F}[\delta(t)]=\int_{-\infty}^{\infty}\delta(t)e^{-i\omega t}\ dt=1
+			\end{equation}
 
 
-	% ## 阶跃函数
+		\section{阶跃函数}
 
-	% 定义：
-	% $$
-	% \epsilon(t)=\left\{
-	% \begin{aligned}
-	% 0&\qquad t<0\\
-	% 1&\qquad t>0
-	% \end{aligned}
-	% \right.
-	% $$
-	% 根据定义我们可以知道，阶跃函数的微分即$\delta$-函数
+			定义：
+			\begin{equation}
+				\epsilon(t)=\left\{
+				\begin{aligned}
+				0&\qquad t<0\\
+				1&\qquad t>0
+				\end{aligned}
+				\right.
+			\end{equation}
+			根据定义我们可以知道，阶跃函数的微分即$\delta$-函数
 
-	% ## 指数衰减函数
+		\section{指数衰减函数}
 \end{document}
