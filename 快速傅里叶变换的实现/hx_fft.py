@@ -1,5 +1,6 @@
 #-*-coding: utf-8-*-
 import numpy as np
+import matplotlib.pyplot as plt
 
 def conv(v1, v2):
     # 对两个向量进行卷积运算
@@ -11,22 +12,25 @@ def conv(v1, v2):
     
 def dft(v):
     # 离散傅里叶变换，这是一个复杂度为O(n^2)的算法
-    N, vec = len(v), np.arange(len(v)).reshape(1, len(v))
-    mat = np.exp(-2 * np.pi / N * 1j) ** np.dot(vec.T, vec)
+    N, vec = len(v), np.arange(len(v)).reshape(len(v), 1)
+    mat = np.exp(-2 * np.pi / N * 1j) ** vec.dot(vec.T)
     return np.dot(v, mat)
-
 
 def idft(v):
     # 离散傅里叶逆变换，这是一个复杂度为O(n^2)的算法
-    N, vec = len(v), np.arange(len(v)).reshape(1, len(v))
-    mat = np.exp(2 * np.pi / N * 1j) ** np.dot(vec.T, vec)
+    N, vec = len(v), np.arange(len(v)).reshape(len(v), 1)
+    mat = np.exp(2 * np.pi / N * 1j) ** vec.dot(vec.T)
     return (np.dot(v, mat) * 1 / N).real
 
-if __name__ == "__main__":
-    a = np.array([1, 3, 4, 5])
-    b = np.array([6, 0, 1, 2, 5])
-    print(conv(a, b))
+def omega(N):
+    v = np.arange(N).reshape(N, 1)
+    mat = np.exp(-2 * np.pi / N * 1j) ** v.dot(v.T)
+    return mat
 
-    a = np.append(a, np.zeros(4))
-    b = np.append(b, np.zeros(3)) 
-    print(np.round(idft(dft(a) * dft(b))))
+if __name__ == "__main__":
+    N = 20
+    mat = np.round(omega(N).reshape(1, N ** 2), 5)
+    l = list(set(mat[0]))
+    plt.scatter(np.real(l), np.imag(l))
+    plt.grid(True)
+    plt.show()
