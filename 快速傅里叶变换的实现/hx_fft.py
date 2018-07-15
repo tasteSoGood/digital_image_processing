@@ -28,6 +28,7 @@ def omega(N):
     return mat
 
 def fft(v):
+    # 只能适用于2^n长度的序列
     n = len(v)
     if n == 1:
         return v
