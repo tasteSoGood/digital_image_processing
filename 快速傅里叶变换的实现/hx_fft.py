@@ -27,10 +27,15 @@ def omega(N):
     mat = np.exp(-2 * np.pi / N * 1j) ** v.dot(v.T)
     return mat
 
+def fft(v):
+    n = len(v)
+    if n == 1:
+        return v
+    even, odd = fft(v[0::2]), fft(v[1::2])
+    omega = np.exp(np.pi * -2j * np.arange(n // 2) / n)
+    return np.concatenate([even + omega * odd, even - omega * odd])
+
 if __name__ == "__main__":
-    N = 20
-    mat = np.round(omega(N).reshape(1, N ** 2), 5)
-    l = list(set(mat[0]))
-    plt.scatter(np.real(l), np.imag(l))
-    plt.grid(True)
-    plt.show()
+    t = np.array([4, 5, 6, 2, 0, 3, 2, 5])
+    print(dft(t))
+    print(fft(t))
