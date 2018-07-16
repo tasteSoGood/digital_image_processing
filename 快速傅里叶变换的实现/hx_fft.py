@@ -12,14 +12,14 @@ def conv(v1, v2):
     
 def dft(v):
     # 离散傅里叶变换，这是一个复杂度为O(n^2)的算法
-    N, vec = len(v), np.arange(len(v)).reshape(len(v), 1)
-    mat = np.exp(-2 * np.pi / N * 1j) ** vec.dot(vec.T)
+    N, vec = len(v), np.arange(len(v))
+    mat = np.exp(-2 * np.pi / N * 1j) ** np.outer(vec, vec) 
     return np.dot(v, mat)
 
 def idft(v):
     # 离散傅里叶逆变换，这是一个复杂度为O(n^2)的算法
-    N, vec = len(v), np.arange(len(v)).reshape(len(v), 1)
-    mat = np.exp(2 * np.pi / N * 1j) ** vec.dot(vec.T)
+    N, vec = len(v), np.arange(len(v))
+    mat = np.exp(2 * np.pi / N * 1j) ** np.outer(vec, vec)
     return (np.dot(v, mat) * 1 / N).real
 
 def omega(N):
